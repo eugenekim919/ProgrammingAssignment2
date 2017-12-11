@@ -1,55 +1,6 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Vector versions of solutions
-makeVector <- function(x = numeric()) {
-  
-  ## initialize the mean variable
-  m <- NULL
-  
-  ## function to put passed vector contents via y into the global x variable and clear the mean
-  set <- function(y) {
-    x <<- y
-    m <<- NULL
-  }
-  
-  ## function just returns the vector
-  get <- function() x
-  
-  ## puts the mean into the m variable within makeVector environment
-  setmean <- function(mean) {
-    m <<- mean
-  }
-  
-  ## function returns the stored mean via m variable
-  getmean <- function() m
-  
-  ## returns all of the functions
-  list(set = set, get = get, setmean = setmean, getmean = getmean)
-
-}
-
-cachemean <- function(x, ...) {
-  
-  ## puts the returning value of mean if available
-  m <- x$getmean()
-  
-  ## checks if available and returns value if it is
-  if(!is.null(m)) {
-    message("getting cached data")
-    return(m)
-  }
-  
-  ## if mean is not available the run the get() function to get the vector data
-  data <- x$get()
-  
-  ## put the mean of the vector data into m variable
-  m <- mean(data, ...)
-  
-  # runs the setmean() function to set the mean of the vector in the makeVector object
-  x$setmean(m)
-  m
-}
+# Week 3 Assignment
+# 12/11/2017
+# Eugene Kim
 
 ###########################################################################
 ## Functions that create the cache matrix and to compute/save the inverse
@@ -69,12 +20,15 @@ makeCacheMatrix <- function(x = matrix()) {
   # gets the contents of the matrix
   get <- function() x 
   
+  # sets the inverse matrix variable at the makeCacheMatrix level
   setinv <- function(inv) {
     i <<- inv
   }
   
+  # returns the inversed matrix
   getinv <- function() i
   
+  # returns the functions
   list(set = set, get = get, setinv = setinv, getinv = getinv)
 }
 
